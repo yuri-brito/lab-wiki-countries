@@ -10,27 +10,21 @@ function CountryDetails(props){
     const [fetching, setFetching]=useState(true)
     let{id}=useParams();
     const paises=props.data
-    const arrayborders=[]
     useEffect(()=>{
         axios.get(`https://ih-countries-api.herokuapp.com/countries/${id}`)
             .then((res) => {
                 setFoundPais(res.data)
                 setFetching(false)
-                console.log(foundPais)
-                console.log(foundPais.borders)
             })
             .catch(err=>console.log(err))
-    },[])
-    console.log(foundPais)
-    console.log(foundPais.borders)
-            
-    return(
-        <div>
-            {/* <NavBar/>
-            <div className="divRow">
+    },[id])
 
+    return (
+        <div>
+            <NavBar/>
+            <div className="divRow">
                 <CountriesList data={paises}/>
-                {fetching&&<Spinner animation="border" role="status"><span className="visually-hidden">Loading...</span></Spinner>}
+                {fetching?<Spinner animation="border" role="status"><span className="visually-hidden">Loading...</span></Spinner>:
                 <div className="countryDetails">
                     <img src={`https://flagpedia.net/data/flags/icon/72x54/${foundPais.alpha2Code.toLowerCase()}.png`} width={100}/>
                     <h2>
@@ -38,7 +32,6 @@ function CountryDetails(props){
                     </h2>
                     <table>
                         <tbody>
-
                             <tr>
                                 <td width={200}>
                                     Capital
@@ -60,16 +53,25 @@ function CountryDetails(props){
                                     Borders
                                 </td>
                                 <td className="celula">
-                                    {arrayborders}
+                                    {foundPais.borders.length===0?<div>-</div>:
+                                    foundPais.borders.map((border)=>{
+                                        
+                                        let paisBorder=paises.find((pais)=>pais.alpha3Code===border)
+                                        return(
+                                            <Link to={`/${border}`} key={foundPais.borders.indexOf(border)} >{paisBorder.name.common}</Link>
+                                        )
+                                    })}
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 
                 </div>
-            </div> */}
+                }
+            </div>
 
     </div>
     )
+    
 }
 export default CountryDetails;
