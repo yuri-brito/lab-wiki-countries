@@ -6,8 +6,10 @@ import Error from './components/Pages/Error';
 import Home from './components/Pages/Home';
 import CountryDetails from './components/CountryDetails';
 import {useState, useEffect} from 'react'
+import {useParams} from 'react-router-dom'
 function App() {
   const[paises,setPaises]=useState([])
+  const[fetching,setFechting]=useState(true)
     useEffect(() => {
         fetch('https://ih-countries-api.herokuapp.com/countries')
            .then((res) => res.json())
@@ -24,16 +26,18 @@ function App() {
                     return 0;
                   })
                 setPaises(data);
+                setFechting(false)
            })
            .catch((err) => {
               console.log(err.message);
            });
      }, []);
+     
   return (
     <div className="App">
       
       <Routes>
-        <Route  path="/" element={<Home data={paises}/>}/>
+        <Route  path="/" element={<Home data={paises} fetching={fetching}/>}/>
         <Route  path="/sobre" element={<About/>}/>
         <Route path="/:id" element={<CountryDetails data={paises} />}/>
         <Route  path="*" element={<Error/>}/>

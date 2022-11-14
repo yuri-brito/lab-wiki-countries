@@ -8,7 +8,7 @@ function Home(props){
         <div>
             <NavBar/>
             <div className="divRow">
-                <CountriesList data={props.data}/>
+                <CountriesList data={props.data} fetching={props.fetching}/>
                 <CountryDetails data={props.data}/>
             </div>
             

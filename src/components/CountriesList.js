@@ -1,4 +1,4 @@
-import {ListGroup, ListGroupItem} from 'react-bootstrap'
+import {ListGroup, ListGroupItem,Spinner} from 'react-bootstrap'
 import './CountryList.css'
 import {Link} from 'react-router-dom'
 function CountriesList(props){
@@ -10,6 +10,7 @@ function CountriesList(props){
 
     return(
         <ListGroup>
+            {props.fetching&&<div className='divList'><Spinner animation="border" role="status"><span className="visually-hidden">Loading...</span></Spinner></div>}
            <div className='divList'> 
                 {listaPaises}
            </div>
