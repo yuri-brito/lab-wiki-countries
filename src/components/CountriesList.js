@@ -1,7 +1,7 @@
 import {ListGroup, ListGroupItem,Spinner, InputGroup,Form} from 'react-bootstrap'
 import './CountryList.css'
 import {Link} from 'react-router-dom'
-import {useState,useEffect} from 'react'
+
 
 function CountriesList(props){
     function pesquisar(e){
@@ -27,7 +27,7 @@ function CountriesList(props){
                 />
             </InputGroup>
             <div className='divList scrollbar-primary'> 
-                    {props.paises.map((pais)=>{return <Link key={props.paises.indexOf(pais)} style={{textDecoration:'none'}} to={`/${pais.alpha3Code}`}><ListGroupItem><img src={`https://flagpedia.net/data/flags/icon/72x54/${pais.alpha2Code.toLowerCase()}.png`} width={30}/><p>{pais.name.common}</p></ListGroupItem></Link>})
+                    {props.paises.map((pais)=>{return <Link key={props.paises.indexOf(pais)} style={{textDecoration:'none'}} to={`/${pais.alpha3Code}`}><ListGroupItem><img alt='bandeira' src={`https://flagpedia.net/data/flags/icon/72x54/${pais.alpha2Code.toLowerCase()}.png`} width={30}/><p>{pais.name.common}</p></ListGroupItem></Link>})
                 }
             </div>
            

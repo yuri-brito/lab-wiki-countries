@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+
 import './App.css';
 import{Routes,Route} from 'react-router-dom'
 import About from './components/Pages/About'
@@ -6,7 +6,7 @@ import Error from './components/Pages/Error';
 import Home from './components/Pages/Home';
 import CountryDetails from './components/CountryDetails';
 import {useState, useEffect} from 'react'
-import {useParams} from 'react-router-dom'
+
 function App() {
   const[paises,setPaises]=useState([])
   const[bpaises,setBpaises]=useState([])

@@ -9,7 +9,7 @@ function CountryDetails(props){
     const [foundPais, setFoundPais]=useState({})
     const [fetching, setFetching]=useState(true)
     let{id}=useParams();
-    const paises=props.paises
+    
     useEffect(()=>{
         axios.get(`https://ih-countries-api.herokuapp.com/countries/${id}`)
             .then((res) => {
@@ -27,7 +27,7 @@ function CountryDetails(props){
                 <CountriesList paises={props.paises}  setPaises={props.setPaises} fetching={props.fetching} bpaises={props.bpaises}/>
                 {fetching?<Spinner animation="border" role="status"><span className="visually-hidden">Loading...</span></Spinner>:
                 <div className="countryDetails">
-                    <img src={`https://flagpedia.net/data/flags/icon/72x54/${foundPais.alpha2Code.toLowerCase()}.png`} width={100}/>
+                    <img alt="bandeira" src={`https://flagpedia.net/data/flags/icon/72x54/${foundPais.alpha2Code.toLowerCase()}.png`} width={100}/>
                     <h2>
                         {foundPais.name.common}
                     </h2>
