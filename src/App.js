@@ -9,37 +9,40 @@ import {useState, useEffect} from 'react'
 import {useParams} from 'react-router-dom'
 function App() {
   const[paises,setPaises]=useState([])
-  const[fetching,setFechting]=useState(true)
-    useEffect(() => {
-        fetch('https://ih-countries-api.herokuapp.com/countries')
-           .then((res) => res.json())
-           .then((data) => {
-                data.sort((a,b)=>{
-                    const nameA = a.name.common.toUpperCase(); // ignore upper and lowercase
-                    const nameB = b.name.common.toUpperCase(); // ignore upper and lowercase
-                    if (nameA > nameB) {
-                      return 1;
-                    }
-                    if (nameA < nameB) {
-                      return -1;
-                    }
-                    return 0;
-                  })
-                setPaises(data);
-                setFechting(false)
-           })
-           .catch((err) => {
-              console.log(err.message);
-           });
-     }, []);
-     
+  const[bpaises,setBpaises]=useState([])
+  const[fetching,setFetching]=useState(true)
+  useEffect(() => {
+      fetch('https://ih-countries-api.herokuapp.com/countries')
+      .then((res) => res.json())
+      .then((data) => {
+              data.sort((a,b)=>{
+                  const nameA = a.name.common.toUpperCase();
+                  const nameB = b.name.common.toUpperCase(); 
+                  if (nameA > nameB) {
+                  return 1;
+                  }
+                  if (nameA < nameB) {
+                  return -1;
+                  }
+                  return 0;
+              })
+              setPaises(data);
+              setBpaises(data)
+              setFetching(false)
+              
+      })
+      .catch((err) => {
+          console.log(err.message);
+      });
+  }, []);
+  
   return (
     <div className="App">
       
       <Routes>
-        <Route  path="/" element={<Home data={paises} fetching={fetching}/>}/>
+        <Route  path="/" element={<Home paises={paises} bpaises={bpaises} setPaises={setPaises} fetching={fetching} />}/>
         <Route  path="/sobre" element={<About/>}/>
-        <Route path="/:id" element={<CountryDetails data={paises} />}/>
+        <Route path="/:id" element={<CountryDetails paises={paises} bpaises={bpaises} setPaises={setPaises} fetching={fetching} />}/>
         <Route  path="*" element={<Error/>}/>
       </Routes>  
 
